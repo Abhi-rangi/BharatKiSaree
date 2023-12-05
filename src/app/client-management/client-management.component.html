@@ -1,0 +1,40 @@
+<div *ngFor="let client of clientsWithOrders">
+  <h3>{{ client.clientName }} - Client Details</h3>
+
+  <p>Shipment Address: {{ client.shipmentAddress }}</p>
+  <p>Phone: {{ client.PhoneNo }}</p>
+  <p>Email Address: {{ client.emailAddress }}</p>
+  <h4>
+    Orders <button (click)="fetchOrderDetails(client.ClientID)">show</button>
+  </h4>
+<div *ngIf="OrderDetailsCard && orderDetails.length>0" class="popup-card">
+    <mat-card *ngFor="let order of orderDetails">
+        <mat-card-title>Order ID: {{ order.OrderID }}</mat-card-title>
+        <mat-card-content>Order Date: {{ order.orerDate }}</mat-card-content>
+        <mat-card-content>
+            <p>Status: {{ order.orderStatus }}</p>
+            <p>Order Details<button mat-icon-button (click)="toggleOrderDetails(order)"><mat-icon>{{ order.isExpanded ? 'keyboard_arrow_up' :
+                    'keyboard_arrow_down' }}</mat-icon>
+                <!-- Add your order details here -->
+            </button></p>
+       
+            <table *ngIf="order.isExpanded">
+                <!-- Table headers -->
+                <tr>
+                    <th>Saree ID</th>
+                    <th>Saree Quantity</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+                <!-- Table rows with order details -->
+                <tr *ngFor="let detail of order.orderDetails">
+                    <td>{{ detail.SareeID }}</td>
+                    <td>{{ detail.quantity }}</td>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+    <button mat-button class="cancel-button" (click)="onCancel()">Cancel</button>
+</div>
+
+  <hr />
+</div>

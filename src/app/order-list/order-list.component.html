@@ -1,0 +1,68 @@
+<!-- order-list.component.html -->
+
+<!-- Table for displaying orders -->
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Order Status</th>
+            <th>User ID</th>
+            <th>Client ID</th>
+            <th>Designer ID</th>
+            <th>Edit</th> <!-- Add a new column for the edit button -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td>{{ order.OrderID }}</td>
+            <td>{{ order.orerDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ order.orderStatus }}</td>
+            <td>{{ order.UserID }}</td>
+            <td>{{ order.ClientID }}</td>
+            <td>{{ order.DesignerID }}</td>
+            <td><button mat-button (click)="editOrder(order)">Edit</button></td>
+            <!-- Use mat-button for Angular Material styling -->
+        </tr>
+    </tbody>
+</table>
+<div class="overlay" [ngClass]="{'active': isCardPopupActive}" (click)="closeCardPopup()"></div>
+
+<div class="card-popup" [ngClass]="{'active': isCardPopupActive}">
+
+    <!-- Card for editing -->
+    <mat-card *ngIf="editingOrder">
+       
+        
+        <mat-card-title>Edit Order</mat-card-title>
+        <br>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Order ID</mat-label>
+                <input matInput [(ngModel)]="editingOrder.OrderID" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Order Date</mat-label>
+                <input matInput [(ngModel)]="editingOrder.orerDate" disabled>
+                <!-- Corrected property name to 'OrderDate' and removed extra 'r' -->
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Order Status</mat-label>
+                <mat-select [(ngModel)]="editingOrder.orderStatus">
+                    <mat-option *ngFor="let status of orderStatusOptions" [value]="status">
+                        {{ status }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Add other fields as needed -->
+
+            <button mat-raised-button color="primary" (click)="saveChanges()">Save Changes</button>
+            <button mat-raised-button color="warn" (click)="cancelEdit()">Cancel</button>
+        </mat-card-content>
+    </mat-card>
+
+
+</div>

@@ -1,0 +1,25 @@
+<!-- src/app/inventory-details/inventory-details.component.html -->
+
+<div *ngIf="inventoryDetails">
+    <h2 class="InventoryDetails">Inventory Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Inventory ID</th>
+                <th>Saree ID</th>
+                <th>Saree Type</th>
+                <th>Designer ID</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of inventoryDetails">
+                <td>{{ item.InventoryID }}</td>
+                <td>{{ item.SareeID }}</td>
+                <td>{{ item.sareeType }}</td>
+                <td>{{ item.DesignerID }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

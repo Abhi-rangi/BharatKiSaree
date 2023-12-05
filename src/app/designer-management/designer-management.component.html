@@ -1,0 +1,168 @@
+<!-- designer-management.component.html -->
+<div>
+  <h2>Designer Management</h2>
+
+  <!-- Add Designer Form -->
+  <div>
+    <button mat-raised-button (click)="openAddDesignerCard()">
+      Add DESIGNER
+    </button>
+    <div
+      class="overlay"
+      [ngClass]="{ active: isCardPopupActive }"
+      (click)="closeCardPopup()"
+    ></div>
+    <div class="card-popup" [ngClass]="{ active: isCardPopupActive }">
+      <mat-card *ngIf="isCardOpen">
+        <form (submit)="addDesigner()">
+          <label for="designerId">Designer ID:</label>
+          <input
+            matInput
+            type="text"
+            id="designerId"
+            [(ngModel)]="newDesigner.DesignerID"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+
+          <label for="designerName">Designer Name:</label>
+          <input
+            matInput
+            type="text"
+            id="designerName"
+            [(ngModel)]="newDesigner.DesignerName"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+
+          <label for="designerPhone">Designer Phone:</label>
+          <input
+            matInput
+            type="text"
+            id="designerPhone"
+            [(ngModel)]="newDesigner.DesignerPhone"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+
+          <label for="designerEmail">Designer Email:</label>
+          <input
+            matInput
+            type="email"
+            id="designerEmail"
+            [(ngModel)]="newDesigner.DesignerEmail"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+
+          <div class="form-actions">
+            <button mat-raised-button type="submit">Add Designer</button>
+            <button mat-filled-button type="button" (click)="cancelForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+
+    <!-- Display Designers as a Table -->
+    <div>
+      <!-- <h3>Designers</h3> -->
+      <table>
+        <thead>
+          <tr>
+            <th>DesignerID</th>
+            <th>Designer Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let designer of designers"
+            (click)="showPopupTable(designer.DesignerID, designer.DesignerName)"
+          >
+            <td>{{ designer.DesignerID }}</td>
+            <td>{{ designer.DesignerName }}</td>
+            <td>{{ designer.DesignerPhone }}</td>
+            <td>{{ designer.DesignerEmail }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Pop-up table -->
+    <br />
+    <hr />
+    <br />
+    <!-- <div class="overlay" [ngClass]="{'active': isPopupVisible}" (click)="closePopupTable()"></div> -->
+    <!-- Card pop-up -->
+    <div [ngClass]="{ active: isPopupVisible }">
+      <div class="card-header">
+        Saree Details of Designer
+        <!-- <button class="close-btn" (click)="closePopupTable()">Close</button> -->
+      </div>
+    <button mat-raised-button (click)="openAddSAREECard()">
+        Add SAREE
+    </button>
+    <div class="overlay1" [ngClass]="{ active: AddCardOpenActive }" (click)="closeCardPopup()"></div>
+    <div class="card-popup1" [ngClass]="{ active: AddCardOpenActive }">
+        <mat-card *ngIf="isAddCardOpen">
+            <form (submit)="addSaree()">
+                <label for="designerId">Designer ID:</label>
+                <input matInput type="text" id="designerId" [(ngModel)]="newSaree.DesignerID"
+                    [ngModelOptions]="{ standalone: true }" required />
+    
+                <label for="sareeID">Saree ID:</label>
+                <input matInput type="text" id="sareeID" [(ngModel)]="newSaree.SareeID"
+                    [ngModelOptions]="{ standalone: true }" required />
+    
+                <label for="sareeType">Saree Type:</label>
+                <input matInput type="text" id="sareeType" [(ngModel)]="newSaree.sareeType" [ngModelOptions]="{ standalone: true }"
+                    required />
+        
+                <label for="description">description:</label>
+                <input matInput type="text" id="designerPhone" [(ngModel)]="newSaree.description"
+                    [ngModelOptions]="{ standalone: true }" required />
+    
+                <label for="price">price:</label>
+                <input matInput type="text" id="designerEmail" [(ngModel)]="newSaree.price"
+                    [ngModelOptions]="{ standalone: true }" required />
+    
+                <div class="form-actions">
+                    <button mat-raised-button type="submit">Add SAREE</button>
+                    <button mat-filled-button type="button" (click)="cancelSareeForm()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+
+      <div class="card-body">
+        <!-- Pop-up table -->
+        <table>
+          <thead>
+            <tr>
+              <th>Saree ID</th>
+              <th>Saree Type</th>
+              <th>Description</th>
+              <th>price</th>
+              <th>Designer Name</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dt of popupData">
+              <td>{{ dt.SareeID }}</td>
+              <td>{{ dt.sareeType }}</td>
+              <td>{{ dt.description }}</td>
+              <td>{{ dt.price }}</td>
+              <td>{{ dt.DesignerName }}</td>
+              <!-- Add more cells as needed -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
